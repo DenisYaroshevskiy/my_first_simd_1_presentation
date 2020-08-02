@@ -176,11 +176,11 @@
         </section>
       </section>
       <section>
-        <h3>Code</h3>
+        <h3>strlen code</h3>
         <pre>
 					<code data-trim data-noescape data-line-numbers="1|2|4|6-8|10,11|13,15|13,16|19">
 std::size_t strlen(const char* s) {
-  using wide = wide&lt;char&gt;
+  using wide = eve::wide&lt;char&gt;;
 
   const wide zeroes{0};
 
@@ -201,6 +201,64 @@ std::size_t strlen(const char* s) {
 }
 					</code>
 				</pre>
+      </section>
+      <section>
+        <h3>Dynamic analysis</h3>
+        <ul>
+          <li class="fragment">load_unsafe(ptr, as_&lt;wide&gt;)</li>
+          <li class="fragment">__attribute__((no_sanitize_address))</li>
+        </ul>
+      </section>
+      <section>
+        <h3>strlen code</h3>
+        <pre>
+					<code data-trim data-noescape>
+std::size_t strlen(const char* s) {
+  using wide = eve::wide&lt;char&gt;;
+
+  const wide zeroes{0};
+
+  aligned_ptr aligned_s =
+    previous_aligned_address&lt;sizeof(wide)&gt;(s);
+  wide cur = load_unsafe(aligned_s, as_&lt;wide&gt;{});
+
+  ignore_first ignore(s - aligned_s.get());
+  std::optional match = first_true(cur == zeroes, ignore);
+
+  while (!match) {
+    aligned_s += wide::static_size;
+    cur = load_unsafe(aligned_s, as_&lt;wide&gt;{});
+    match = first_true(cur == zeroes, ignore_none);
+  }
+
+  return static_cast&lt;std::size_t&gt;(aligned_s.get() + *match - s);
+}
+					</code>
+				</pre>
+      </section>
+      <section>
+        <h3>Measuring</h3>
+        <p class="fragment">... is hard</p>
+      </section>
+      <section>
+        <h3>Dealing with code alignment</h3>
+        <ul>
+          <li class="fragment">__attribute__((always_inline))</li>
+          <li class="fragment">-mllvm -align-all-functions=7</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Dealing with code alignment</h3>
+        <pre><code data-trim data-noescape data-line-numbers="2|3|5,7">
+template &lt;typename Slide, /*...*/&gt;
+NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
+  noop_slide(slide);  // asm volatile("nop");
+
+  for (auto _ : state) {
+    // measure this
+  }
+}
+        </code></pre>
       </section>
     </div>
   </div>
