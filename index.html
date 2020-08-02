@@ -2,190 +2,224 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>My first simd</title>
+  <title>My first simd</title>
 
-	<link rel="stylesheet" href="dist/reset.css">
-	<link rel="stylesheet" href="dist/reveal.css">
-	<link rel="stylesheet" href="dist/theme/serif.css" id="theme">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/simple.css" id="theme">
 
-	<!-- Theme used for syntax highlighted code -->
-	<link rel="stylesheet" href="plugin/highlight/monokai.css"
-		id="highlight-theme">
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/arduino-light.css">
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/idea.css" id="highlight-theme">
+
+
 </head>
 
 <body>
-	<div class="reveal">
-		<div class="slides">
-			<section data-transition="none">
-				<h2>My first SIMD</h2>
-				<h4>Implementing STL Algorithms Using AVX2 Extensions</h4>
-				<p>Denis Yaroshevskiy</p>
-			</section>
-			<section>
-				So, what's this about?
-			</section>
-			<section>
-				<h3>Disclaimers</h3>
-				<ul>
-					<li class="fragment">I am NOT an expert in SIMD.</li>
-					<li class="fragment">One compiler, one machine.</li>
-					<li class="fragment">Everything is x86 specific.</li>
-					<li class="fragment">Some of my statements are opinions.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>The Plan</h3>
-				<ul>
-					<li class="fragment">What's SIMD and how to get it.</li>
-					<li class="fragment">std::strlen</li>
-					<li class="fragment">Some other algorithms.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>What's SIMD and how to get it.</h3>
-			</section>
-			<section>
-				<h3>x86 vector extensions</h3>
-				<ul>
-					<li class="fragment">SSE 1-3 (Pentium 4)</li>
-					<li class="fragment">SSE 4-4.2</li>
-					<li class="fragment">AVX (PS4)</li>
-					<li class="fragment">AVX-2 (Mac book air 2015)</li>
-					<li class="fragment">AVX-512 (servers only)</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Tell your compiler</h3>
-				<ul>
-					<li class="fragment">-march=native</li>
-					<li class="fragment">Compile for specific architectures</li>
-					<li class="fragment">Runtime selection (hard)</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Now get some SIMD code</h3>
-				<ul>
-					<li class="fragment">auto-vectorization</li>
-					<li class="fragment">openmp</li>
-					<li class="fragment">by hand with intrinsics or assembly</li>
-				</ul>
-			</section>
-			<section>
-				<section>
-					<img src="img/programming_model/img0.png" alt="programming_model">
-				</section>
-				<section>
-					<img src="img/programming_model/img1.png" alt="programming_model">
-				</section>
-				<section>
-					<img src="img/programming_model/img2.png" alt="programming_model">
-				</section>
-				<section>
-					<img src="img/programming_model/img3.png" alt="programming_model">
-				</section>
-			</section>
-			<section>
-				<h3>On using intrinsics</h3>
-				<ul>
-					<li class="fragment">#immintrin.h</li>
-					<li class="fragment"> <a
-							href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">
-							intel intrinsics docs </a> </li>
-				</ul>
-			</section>
-			<section>
-				<h3>Wrap it!</h3>
-				<ul>
-					<li class="fragment"><a href="https://youtu.be/8khWb-Bhhvs"> Jefferson
-							Amstutz talk</a> </li>
-					<li class="fragment">documentation </li>
-					<li class="fragment">extensibility</li>
-					<li class="fragment">type support</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Wrap it!</h3>
-				<ul>
-					<li class="fragment">nsimd, tsimd, xsimd, vc</li>
-					<li class="fragment">write my own</li>
-					<li class="fragment">eve</li>
-				</ul>
-			</section>
-			<section>
-				<h3>strlen</h3>
-				<a
-					href="https://stackoverflow.com/questions/25566302/vectorized-strlen-getting-away-with-reading-unallocated-memory">
-					Stephen Canon (stackoverflow)</a>
-			</section>
-			<section>
-				<h3>Ideas</h3>
-				<ul>
-					<li class="fragment">allocations happen in pages</li>
-					<li class="fragment">aligned addresses are safe</li>
-				</ul>
-			</section>
-			<section>
-				<section>
-					<img src="img/aligned_addresses/img0.png" alt="aligned_addresses">
-				</section>
-				<section>
-					<img src="img/aligned_addresses/img1.png" alt="aligned_addresses">
-				</section>
-				<section>
-					<img src="img/aligned_addresses/img2.png" alt="aligned_addresses">
-				</section>
-				<section>
-					<img src="img/aligned_addresses/img3.png" alt="aligned_addresses">
-				</section>
-			</section>
-			<section>
-				<section>
-					<img src="img/strlen/img0.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img1.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img2.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img3.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img4.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img5.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img6.png" alt="strlen">
-				</section>
-				<section>
-					<img src="img/strlen/img7.png" alt="strlen">
-				</section>
-			</section>
-		</div>
-	</div>
+  <div class="reveal">
+    <div class="slides">
+      <section data-transition="none">
+        <h2>My first SIMD</h2>
+        <h4>Implementing STL Algorithms Using AVX2 Extensions</h4>
+        <p>Denis Yaroshevskiy</p>
+      </section>
+      <section>
+        So, what's this about?
+      </section>
+      <section>
+        <h3>Disclaimers</h3>
+        <ul>
+          <li class="fragment">I am NOT an expert in SIMD.</li>
+          <li class="fragment">One compiler, one machine.</li>
+          <li class="fragment">Everything is x86 specific.</li>
+          <li class="fragment">Some of my statements are opinions.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>The Plan</h3>
+        <ul>
+          <li class="fragment">What's SIMD and how to get it.</li>
+          <li class="fragment">std::strlen</li>
+          <li class="fragment">Some other algorithms.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>What's SIMD and how to get it.</h3>
+      </section>
+      <section>
+        <h3>x86 vector extensions</h3>
+        <ul>
+          <li class="fragment">SSE 1-3 (Pentium 4)</li>
+          <li class="fragment">SSE 4-4.2</li>
+          <li class="fragment">AVX (PS4)</li>
+          <li class="fragment">AVX-2 (Mac book air 2015)</li>
+          <li class="fragment">AVX-512 (servers only)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Tell your compiler</h3>
+        <ul>
+          <li class="fragment">-march=native</li>
+          <li class="fragment">Compile for specific architectures</li>
+          <li class="fragment">Runtime selection (hard)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Now get some SIMD code</h3>
+        <ul>
+          <li class="fragment">auto-vectorization</li>
+          <li class="fragment">openmp</li>
+          <li class="fragment">by hand with intrinsics or assembly</li>
+        </ul>
+      </section>
+      <section>
+        <section>
+          <img src="img/programming_model/img0.png" alt="programming_model">
+        </section>
+        <section>
+          <img src="img/programming_model/img1.png" alt="programming_model">
+        </section>
+        <section>
+          <img src="img/programming_model/img2.png" alt="programming_model">
+        </section>
+        <section>
+          <img src="img/programming_model/img3.png" alt="programming_model">
+        </section>
+      </section>
+      <section>
+        <h3>On using intrinsics</h3>
+        <ul>
+          <li class="fragment">#immintrin.h</li>
+          <li class="fragment"> <a
+              href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">
+              intel intrinsics docs </a> </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Wrap it!</h3>
+        <ul>
+          <li class="fragment"><a href="https://youtu.be/8khWb-Bhhvs"> Jefferson
+              Amstutz talk</a> </li>
+          <li class="fragment">documentation </li>
+          <li class="fragment">extensibility</li>
+          <li class="fragment">type support</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Wrap it!</h3>
+        <ul>
+          <li class="fragment">nsimd, tsimd, xsimd, vc</li>
+          <li class="fragment">write my own</li>
+          <li class="fragment">eve</li>
+        </ul>
+      </section>
+      <section>
+        <h3>strlen</h3>
+        <a
+          href="https://stackoverflow.com/questions/25566302/vectorized-strlen-getting-away-with-reading-unallocated-memory">
+          Stephen Canon (stackoverflow)</a>
+      </section>
+      <section>
+        <h3>Ideas</h3>
+        <ul>
+          <li class="fragment">allocations happen in pages</li>
+          <li class="fragment">aligned addresses are safe</li>
+        </ul>
+      </section>
+      <section>
+        <section>
+          <img src="img/aligned_addresses/img0.png" alt="aligned_addresses">
+        </section>
+        <section>
+          <img src="img/aligned_addresses/img1.png" alt="aligned_addresses">
+        </section>
+        <section>
+          <img src="img/aligned_addresses/img2.png" alt="aligned_addresses">
+        </section>
+        <section>
+          <img src="img/aligned_addresses/img3.png" alt="aligned_addresses">
+        </section>
+      </section>
+      <section>
+        <section>
+          <img src="img/strlen/img0.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img1.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img2.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img3.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img4.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img5.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img6.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/strlen/img7.png" alt="strlen">
+        </section>
+      </section>
+      <section>
+        <h3>Code</h3>
+        <pre>
+					<code data-trim data-noescape data-line-numbers="1|2|4|6-8|10,11|13,15|13,16|19">
+std::size_t strlen(const char* s) {
+  using wide = wide&lt;char&gt;
 
-	<script src="dist/reveal.js"></script>
-	<script src="plugin/notes/notes.js"></script>
-	<script src="plugin/markdown/markdown.js"></script>
-	<script src="plugin/highlight/highlight.js"></script>
-	<script>
-		// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
-		Reveal.initialize({
-			hash: true,
-			transition: 'none',
-			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
-		});
-	</script>
+  const wide zeroes{0};
+
+  aligned_ptr aligned_s =
+    previous_aligned_address&lt;sizeof(wide)&gt;(s);
+  wide cur{aligned_s};
+
+  ignore_first ignore(s - aligned_s.get());
+  std::optional match = first_true(cur == zeroes, ignore);
+
+  while (!match) {
+    aligned_s += wide::static_size;
+    cur = wide{aligned_s};
+    match = first_true(cur == zeroes, ignore_none);
+  }
+
+  return static_cast&lt;std::size_t&gt;(aligned_s.get() + *match - s);
+}
+					</code>
+				</pre>
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+      transition: 'none',
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
 </body>
 
 </html>
