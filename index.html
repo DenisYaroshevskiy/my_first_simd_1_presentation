@@ -10,7 +10,19 @@
 
   <link rel="stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
-  <link rel="stylesheet" href="dist/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="bench_plot.css">
+  <link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+  <script>
+    const UNSQ_EVE_COMMIT = `965d356b7a824a00a6904add2ae2b1769cf33fa8`;
+  </script>
+  <script type="text/javascript" src="test_bench.js"></script>
+  <!--
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/gh/DenisYaroshevskiy/unsq_eve@965d356b7a824a00a6904add2ae2b1769cf33fa8/scripts/bench.js"></script>
+  -->
 
   <!-- Theme used for syntax highlighted code -->
   <link rel="stylesheet"
@@ -20,7 +32,6 @@
 
   <!-- Theme used for syntax highlighted code -->
   <link rel="stylesheet" href="plugin/highlight/idea.css" id="highlight-theme">
-
 
 </head>
 
@@ -259,6 +270,21 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
   }
 }
         </code></pre>
+      </section>
+      <section>
+        <h3>Plot</h3>
+        <div id='some_plot'> </div>
+        <script>presentationEntryPoint('some_plot', {
+            name: 'remove 0',
+            size: 10000,
+            algorithm: 'std::remove',
+            type: 'int',
+            time: 'y',
+            padding: 'x',
+            group: 'intel_9700K',
+            percentage: 50,
+          }, []);
+        </script>
       </section>
     </div>
   </div>
