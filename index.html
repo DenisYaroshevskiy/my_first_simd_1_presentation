@@ -351,12 +351,16 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
         <h3> std::reduce </h3>
       </section>
       <section>
-        <h3> std::reduce (building blocks)</h3>
+        <h3> reduce (same type)</h3>
         <ul>
           <li class="fragment">replace_ignored(wide, ignore, wide)</li>
           <li class="fragment">reduce_wide(wide, op) -> wide</li>
-          <li class="fragment">convert(wide) -> wide</li>
         </ul>
+      </section>
+      <section id='reduce'>
+        <script>
+          imagesSlideShow('reduce', 9);
+        </script>
       </section>
       <section id='reduce_wide'>
         <script>
