@@ -127,9 +127,6 @@
       </section>
       <section>
         <h3>strlen</h3>
-        <a
-          href="https://stackoverflow.com/questions/25566302/vectorized-strlen-getting-away-with-reading-unallocated-memory">
-          Stephen Canon (stackoverflow)</a>
       </section>
       <section>
         <h3>Ideas</h3>
@@ -294,6 +291,76 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
       <section id='simd_foreach'>
         <script>
           imagesSlideShow('simd_foreach', 4);
+        </script>
+      </section>
+      <section id='find/find unguarded/strlen'>
+        <script>
+          allSizesBenchmark('find/find unguarded/strlen',
+            'find/find unguarded/strlen',
+            {
+              name: 'find 0',
+              algorithm: 'selection',
+              type: 'char',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['unsq_eve::find<256, 4>', 'unsq_eve::find_unguarded<256, 4>', 'std::strlen']);
+        </script>
+      </section>
+      <section id='against scalar find unguarded'>
+        <script>
+          allSizesBenchmark('against scalar find unguarded',
+            'against scalar find unguarded',
+            {
+              name: 'find 0',
+              algorithm: 'selection',
+              type: 'x',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['unsq_eve::find_unguarded<256, 4>', 'std_::find_unguarded']);
+        </script>
+      </section>
+      <section id='against scalar find'>
+        <script>
+          allSizesBenchmark('against scalar find',
+            'against scalar find',
+            {
+              name: 'find 0',
+              algorithm: 'selection',
+              type: 'x',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['unsq_eve::find<256, 4>', 'std::find']);
+        </script>
+      </section>
+      <section>
+        <h3> Notes on find/find_unguarded </h3>
+        <ul>
+          <li class="fragment"> <a
+              href="https://stackoverflow.com/questions/25566302/vectorized-strlen-getting-away-with-reading-unallocated-memory">
+              Stephen Canon (stackoverflow)</a></li>
+          <li class="fragment">int* has to be aligned to alignof(int)</li>
+        </ul>
+      </section>
+      <section>
+        <h3> std::reduce </h3>
+      </section>
+      <section>
+        <h3> std::reduce (building blocks)</h3>
+        <ul>
+          <li class="fragment">replace_ignored(wide, ignore, wide)</li>
+          <li class="fragment">reduce_wide(wide, op) -> wide</li>
+          <li class="fragment">convert(wide) -> wide</li>
+        </ul>
+      </section>
+      <section id='reduce_wide'>
+        <script>
+          imagesSlideShow('reduce_wide', 6);
         </script>
       </section>
     </div>
