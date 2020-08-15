@@ -16,13 +16,13 @@
   <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
   <script>
-    const UNSQ_EVE_COMMIT = `965d356b7a824a00a6904add2ae2b1769cf33fa8`;
+    const UNSQ_EVE_COMMIT = `2cf6819dda923fc021629eda0cfba4113eb5f530`;
   </script>
-  <script type="text/javascript" src="test_bench.js"></script>
-  <!--
+
   <script type="text/javascript"
-    src="https://cdn.jsdelivr.net/gh/DenisYaroshevskiy/unsq_eve@965d356b7a824a00a6904add2ae2b1769cf33fa8/scripts/bench.js"></script>
-  -->
+    src="https://cdn.jsdelivr.net/gh/DenisYaroshevskiy/unsq_eve@2cf6819dda923fc021629eda0cfba4113eb5f530/scripts/bench.js"></script>
+
+  <script type="text/javascript" src="helper_scripts.js"></script>
 
   <!-- Theme used for syntax highlighted code -->
   <link rel="stylesheet"
@@ -272,9 +272,10 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
         </code></pre>
       </section>
       <section>
-        <h3>Plot</h3>
-        <div id='some_plot'> </div>
-        <script>presentationEntryPoint('some_plot', {
+        <h3>std::remove, alignment</h3>
+        <div id='std::remove, alignment'> </div>
+        <script>
+          presentationEntryPoint('std::remove, alignment', {
             name: 'remove 0',
             size: 10000,
             algorithm: 'std::remove',
@@ -285,6 +286,63 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
             percentage: 50,
           }, []);
         </script>
+      </section>
+      <section>
+        <h3>SIMD measurements</h3>
+        <ul>
+          <li class="fragment">40, 1000, 10'000 bytes</li>
+          <li class="fragment">char, short, int</li>
+        </ul>
+      </section>
+      <section id='is_our_strlen_good'>
+        <script>
+          allSizesBenchmark('is_our_strlen_good',
+            'Is our strlen good?',
+            {
+              name: 'find 0',
+              algorithm: 'selection',
+              type: 'char',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['unsq_eve::find_unguarded<256, 1>', 'std::strlen']);
+        </script>
+      </section>
+      <section id='unrolling'>
+        <script>
+          allSizesBenchmark('unrolling',
+            'Unrolling',
+            {
+              name: 'find 0',
+              algorithm: 'selection',
+              type: 'char',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['unsq_eve::find_unguarded<256, 1>', 'unsq_eve::find_unguarded<256, 4>', 'std::strlen']);
+        </script>
+      </section>
+      <section>
+        <section>
+          <img src="img/using_multiple_registers/img0.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/using_multiple_registers/img1.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/using_multiple_registers/img2.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/using_multiple_registers/img3.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/using_multiple_registers/img4.png" alt="strlen">
+        </section>
+        <section>
+          <img src="img/using_multiple_registers/img5.png" alt="strlen">
+        </section>
       </section>
     </div>
   </div>
