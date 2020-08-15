@@ -33,3 +33,20 @@ function allSizesBenchmark(slide_id, title, parameters, filter) {
     addBenchmarkForSize(slide_id, title, size, parameters, filter);
   }
 }
+
+function addImg(parent, img_path) {
+  let img = document.createElement('img');
+  img.src = img_path;
+  parent.appendChild(img);
+  return img;
+}
+
+function imagesSlideShow(id, img_count) {
+  let main = document.getElementById(id);
+  for (let i = 0; i != img_count; ++i) {
+    let section = addSection(main);
+    const img_path = 'img/' + id + '/img' + i.toString() + '.png';
+    console.log(img_path);
+    addImg(section, img_path);
+  }
+}
