@@ -367,6 +367,66 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
           imagesSlideShow('reduce_wide', 6);
         </script>
       </section>
+      <section>
+        <h3> reduce (different type)</h3>
+        <ul>
+          <li class="fragment">wide&lt;T, fixed&lt;N&gt;&gt;</li>
+          <li class="fragment">convert</li>
+        </ul>
+      </section>
+      <section id='reduce_different_type'>
+        <script>
+          imagesSlideShow('reduce_different_type', 6);
+        </script>
+      </section>
+      <section id='reduce: char'>
+        <script>
+          allSizesBenchmark('reduce: char',
+            'reduce: char',
+            {
+              name: 'sum',
+              algorithm: 'selection',
+              type: 'char',
+              sum_type: 'x',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['std::reduce', 'unsq_eve::reduce<256, 4>']);
+        </script>
+      </section>
+      <section id='reduce: short'>
+        <script>
+          allSizesBenchmark('reduce: short',
+            'reduce: short',
+            {
+              name: 'sum',
+              algorithm: 'selection',
+              type: 'short',
+              sum_type: 'x',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['std::reduce', 'unsq_eve::reduce<256, 4>']);
+        </script>
+      </section>
+      <section id='reduce: int'>
+        <script>
+          allSizesBenchmark('reduce: int',
+            'reduce: int',
+            {
+              name: 'sum',
+              algorithm: 'selection',
+              type: 'int',
+              sum_type: 'int',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['std::reduce', 'unsq_eve::reduce<256, 4>']);
+        </script>
+      </section>
     </div>
   </div>
 
