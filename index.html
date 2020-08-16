@@ -348,7 +348,7 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
         </ul>
       </section>
       <section>
-        <h3> std::reduce </h3>
+        <h3> reduce </h3>
       </section>
       <section>
         <h3> reduce (same type)</h3>
@@ -368,7 +368,7 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
         </script>
       </section>
       <section>
-        <h3> reduce (different type)</h3>
+        <h3> reduce (different type) </h3>
         <ul>
           <li class="fragment">wide&lt;T, fixed&lt;N&gt;&gt;</li>
           <li class="fragment">convert</li>
@@ -425,6 +425,21 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
               group: 'intel_9700K',
             },
             ['std::reduce', 'unsq_eve::reduce<256, 4>']);
+        </script>
+      </section>
+      <section>
+        <h3> inclusive_scan </h3>
+      </section>
+      <section>
+        <h3> inclusive_scan (in place)</h3>
+        <ul>
+          <li class="fragment"> store(ptr, wide, ignore) </li>
+          <li class="fragment"> inclusive_scan_wide(wide, zero)</li>
+        </ul>
+      </section>
+      <section id='inclusive_scan'>
+        <script>
+          imagesSlideShow('inclusive_scan', 9);
         </script>
       </section>
     </div>
