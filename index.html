@@ -442,6 +442,37 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
           imagesSlideShow('inclusive_scan', 9);
         </script>
       </section>
+      <section id='inclusive_scan_wide'>
+        <script>
+          imagesSlideShow('inclusive_scan_wide', 8);
+        </script>
+      </section>
+      <section id='inclusive_scan_bench'>
+        <script>
+          allSizesBenchmark('inclusive_scan_bench',
+            'inclusive scan',
+            {
+              name: 'inplace transform',
+              algorithm: 'selection',
+              type: 'x',
+              time: 'y',
+              padding: 'min',
+              group: 'intel_9700K',
+            },
+            ['inclusive_scan_inplace<256, 1>',
+              'inclusive_scan_inplace<256, 2>',
+              'std::inclusive_scan']);
+        </script>
+      </section>
+      <section>
+        <h3> Notes on inclusive_scan </h3>
+        <ul>
+          <li class="fragment"> <a
+              href="https://stackoverflow.com/a/19496697/5021064">
+              Z boson (stackoverflow)</a></li>
+          <li class="fragment"> Avoid _mm_maskmoveu_si128</li>
+        </ul>
+      </section>
     </div>
   </div>
 
