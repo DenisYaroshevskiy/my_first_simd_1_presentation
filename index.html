@@ -478,14 +478,14 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
       </section>
       <section id='compress_store_unsafe'>
         <script>
-          imagesSlideShow('compress_store_unsafe', 6);
+          imagesSlideShow('compress_store_unsafe', 7);
         </script>
       </section>
       <section>
         <h3> remove </h3>
         <ul>
-          <li class="fragment"> compress_store_unsafe(wide, ptr, logical,
-            ignore) -> ptr </li>
+          <li class="fragment"> compress_store_unsafe(wide, T*, logical,
+            ignore) -> T* </li>
           <li class="fragment"> compress_store_precise </li>
           <li class="fragment"> if_not_ </li>
           <li class="fragment"> remove_copy(f, l, o) </li>
