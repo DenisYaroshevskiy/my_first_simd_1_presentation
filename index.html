@@ -44,7 +44,9 @@
         <p>Denis Yaroshevskiy</p>
       </section>
       <section>
-        So, what's this about?
+        <p>So, what's this about? </p>
+        <p><a href="https://tinyurl.com/y5hn6e3c"> https://tinyurl.com/y5hn6e3c
+          </a></p>
       </section>
       <section>
         <h3>Disclaimers</h3>
@@ -488,7 +490,6 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
             ignore) -> T* </li>
           <li class="fragment"> compress_store_precise </li>
           <li class="fragment"> if_not_ </li>
-          <li class="fragment"> remove_copy(f, l, o) </li>
         </ul>
       </section>
       <section id='remove_if'>
@@ -496,6 +497,125 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
           imagesSlideShow('remove_if', 7);
         </script>
       </section>
+      <section id='remove: char'>
+        <script>
+          allSizesBenchmark('remove: char',
+            'remove: char',
+            {
+              name: 'remove 0',
+              algorithm: 'selection',
+              type: 'char',
+              time: 'y',
+              percentage: 'x',
+              padding: 'min',
+              group: 'intel_9700K'
+            },
+            ['std::remove', 'unsq_eve::remove<256, 1>']);
+        </script>
+      </section>
+      <section id='remove: short'>
+        <script>
+          allSizesBenchmark('remove: short',
+            'remove: short',
+            {
+              name: 'remove 0',
+              algorithm: 'selection',
+              type: 'short',
+              time: 'y',
+              percentage: 'x',
+              padding: 'min',
+              group: 'intel_9700K'
+            },
+            ['std::remove', 'unsq_eve::remove<256, 1>']);
+        </script>
+      </section>
+      <section id='remove: int'>
+        <script>
+          allSizesBenchmark('remove: int',
+            'remove: int',
+            {
+              name: 'remove 0',
+              algorithm: 'selection',
+              type: 'int',
+              time: 'y',
+              percentage: 'x',
+              padding: 'min',
+              group: 'intel_9700K'
+            },
+            ['std::remove', 'unsq_eve::remove<256, 1>']);
+        </script>
+      </section>
+      <section>
+        <h3> Notes on remove </h3>
+        <ul>
+          <li class="fragment"> <a
+              href="https://stackoverflow.com/a/36951611/5021064">
+              Peter Cordes (stackoverflow)</a></li>
+          <li class="fragment"> remove_copy(f, l, o) </li>
+        </ul>
+      </section>
+      <section>
+        <h3> General notes </h3>
+        <ul>
+          <li class="fragment"> massive speed ups </li>
+          <li class="fragment"> code alignment impact on simd </li>
+          <li class="fragment"> data impact on simd </li>
+          <li class="fragment"> aligned/unaligned memory access </li>
+          <li class="fragment"> write strlen </li>
+        </ul>
+      </section>
+      <section>
+        <h3> What we didn't cover? </h3>
+        <ul>
+          <li class="fragment"> multiple range algorithms </li>
+          <li class="fragment"> floating point </li>
+          <li class="fragment"> math </li>
+          <li class="fragment"> cache effects </li>
+        </ul>
+      </section>
+      <section>
+        <h3> Don't know how to </h3>
+        <ul>
+          <li class="fragment"> merge/set_union </li>
+          <li class="fragment"> partition (in place)</li>
+          <li class="fragment"> insertion sort </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Thanks to</h3>
+        <ul>
+          <li> Joel Falcou </li>
+          <li> Peter Cordes </li>
+        </ul>
+      </section>
+      <section>
+        <h3> Links </h3>
+        <ul>
+          <li> <a href="https://github.com/DenisYaroshevskiy/unsq_eve">unsq_eve
+            </a></li>
+          <li> <a
+              href="https://opensource.apple.com/source/Libc/Libc-997.90.3/x86_64/string/">
+              mac os libc</a>, <a
+              href="https://code.woboq.org/userspace/glibc/sysdeps/x86_64/multiarch/">
+              glibc </a></li>
+          <li> my stackoverflow posts: <a
+              href="https://stackoverflow.com/a/61431303/5021064">1</a> <a
+              href="https://stackoverflow.com/a/62235276/5021064">2</a> <a
+              href="https://stackoverflow.com/a/62492369/5021064">3</a> </li>
+          <li> <a
+              href="https://www.youtube.com/playlist?list=PLqCJpWy5FohfwOaELrhGqJlBF14xaSB_Y">
+              ChiliTomatoNoodle (adult humor!)</a></li>
+        </ul>
+      </section>
+      <section>
+        <p>write strlen</p>
+      </section>
+      <section>
+        <h3>Questions?</h3>
+        <p><a href="denisyaroshevskiy.github.io /my_first_simd_1_presentation">
+            denisyaroshevskiy.github.io/my_first_simd_1_presentation</a></p>
+      </section>
+
     </div>
   </div>
 
@@ -513,6 +633,8 @@ NOINLINE void benmark_body(Slide slide, benchmark::State& state, /* ... */) {
       // Learn about plugins: https://revealjs.com/plugins/
       plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
     });
+
+    Reveal.configure({ slideNumber: 'c/t' });
   </script>
 </body>
 
