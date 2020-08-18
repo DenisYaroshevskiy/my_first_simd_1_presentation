@@ -50,3 +50,13 @@ function imagesSlideShow(id, img_count) {
     addImg(section, img_path);
   }
 }
+
+function addBloombergCopyRight() {
+  let slides = document.getElementsByTagName("section");
+  for (let i = 0; i < slides.length; ++i) {
+    let slide = slides[i];
+    slide.setAttribute("data-background-image", "img/bloomberg-logo-alpha.svg");
+    slide.setAttribute("data-background-size", "auto 10%");
+    slide.setAttribute("data-background-position", "bottom 20px left 35px");
+  }
+}
