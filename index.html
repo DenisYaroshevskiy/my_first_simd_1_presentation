@@ -51,7 +51,7 @@
       <section id='strlen vs scalar'>
         <script>
           allSizesBenchmark('strlen vs scalar',
-            'strlen vs scalar',
+            'strlen vs. scalar',
             {
               name: 'find 0',
               algorithm: 'selection',
@@ -69,19 +69,19 @@
           <li class="fragment">I am NOT an expert in SIMD.</li>
           <li class="fragment">One compiler, one machine.</li>
           <li class="fragment">Everything is x86 specific.</li>
-          <li class="fragment">Some of my statements are opinions.</li>
+          <li class="fragment">Some of my statements are my opinions.</li>
         </ul>
       </section>
       <section>
         <h3>The Plan</h3>
         <ul>
-          <li class="fragment">What's SIMD and how to get it.</li>
+          <li class="fragment">What's SIMD and how to get it?</li>
           <li class="fragment">std::strlen</li>
           <li class="fragment">Some other algorithms.</li>
         </ul>
       </section>
       <section>
-        <h3>What's SIMD and how to get it.</h3>
+        <h3>What's SIMD and how to get it?</h3>
       </section>
       <section>
         <h3>x86 vector extensions</h3>
@@ -89,7 +89,7 @@
           <li class="fragment">SSE 1-3 (Pentium 4)</li>
           <li class="fragment">SSE 4-4.2</li>
           <li class="fragment">AVX (PS4)</li>
-          <li class="fragment">AVX-2 (Mac book air 2015)</li>
+          <li class="fragment">AVX-2 (MacBook Air 2015)</li>
           <li class="fragment">AVX-512 (servers only)</li>
         </ul>
       </section>
@@ -106,7 +106,7 @@
         <ul>
           <li class="fragment">auto-vectorization</li>
           <li class="fragment">openmp</li>
-          <li class="fragment">by hand with intrinsics or assembly</li>
+          <li class="fragment">by hand with intrinsics or Assembly</li>
         </ul>
       </section>
       <section id='programming_model'>
@@ -121,14 +121,14 @@
           <li class="fragment">#immintrin.h</li>
           <li class="fragment"> <a
               href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">
-              intel intrinsics docs </a> </li>
+              Intel Intrinsics Guide </a> </li>
         </ul>
       </section>
       <section>
         <h3>Wrap it!</h3>
         <ul>
           <li class="fragment"><a href="https://youtu.be/8khWb-Bhhvs"> Jefferson
-              Amstutz talk</a> </li>
+              Amstutz talk (CppCon 2018)</a> </li>
           <li class="fragment">documentation </li>
           <li class="fragment">extensibility</li>
           <li class="fragment">type support</li>
@@ -226,7 +226,7 @@ std::size_t strlen(const char* s) {
       <section>
         <h3>Measuring</h3>
         <ul>
-          <li class="fragment">google benchmark</li>
+          <li class="fragment">Google benchmark</li>
           <li class="fragment">code alignment</li>
           <li class="fragment">40, 1000, 10'000 bytes</li>
           <li class="fragment">char, short, int</li>
@@ -317,7 +317,7 @@ std::size_t strlen(const char* s) {
         <ul>
           <li class="fragment"> <a
               href="https://stackoverflow.com/questions/25566302/vectorized-strlen-getting-away-with-reading-unallocated-memory">
-              Stephen Canon (stackoverflow)</a></li>
+              Stephen Canon (Stack Overflow)</a></li>
           <li class="fragment">int* has to be aligned to alignof(int)</li>
         </ul>
       </section>
@@ -442,7 +442,7 @@ std::size_t strlen(const char* s) {
         <ul>
           <li class="fragment"> <a
               href="https://stackoverflow.com/a/19496697/5021064">
-              Z boson (stackoverflow)</a></li>
+              Z boson (Stack Overflow)</a></li>
           <li class="fragment"> Avoid _mm_maskmoveu_si128</li>
         </ul>
       </section>
@@ -521,7 +521,7 @@ std::size_t strlen(const char* s) {
         <ul>
           <li class="fragment"> <a
               href="https://stackoverflow.com/a/36951611/5021064">
-              Peter Cordes (stackoverflow)</a></li>
+              Peter Cordes (Stack Overflow)</a></li>
           <li class="fragment"> remove_copy(f, l, o) </li>
         </ul>
       </section>
@@ -529,8 +529,8 @@ std::size_t strlen(const char* s) {
         <h3> General notes </h3>
         <ul>
           <li class="fragment"> massive speed ups </li>
-          <li class="fragment"> code alignment impact on simd </li>
-          <li class="fragment"> data impact on simd </li>
+          <li class="fragment"> code alignment impact on SIMD </li>
+          <li class="fragment"> data impact on SIMD </li>
           <li class="fragment"> aligned/unaligned memory access </li>
         </ul>
       </section>
@@ -567,10 +567,10 @@ std::size_t strlen(const char* s) {
           <li> <a href="https://github.com/jfalcou/eve">eve</a></li>
           <li> <a
               href="https://opensource.apple.com/source/Libc/Libc-997.90.3/x86_64/string/">
-              mac os libc</a>, <a
+              Mac Os libc</a>, <a
               href="https://code.woboq.org/userspace/glibc/sysdeps/x86_64/multiarch/">
               glibc </a></li>
-          <li> my stackoverflow posts: <a
+          <li> my Stack Overflow posts: <a
               href="https://stackoverflow.com/a/61431303/5021064">1</a> <a
               href="https://stackoverflow.com/a/62235276/5021064">2</a> <a
               href="https://stackoverflow.com/a/62492369/5021064">3</a> </li>
@@ -587,8 +587,10 @@ std::size_t strlen(const char* s) {
       </section>
       <section>
         <h3>Questions?</h3>
-        <p><a href="denisyaroshevskiy.github.io /my_first_simd_1_presentation">
-            denisyaroshevskiy.github.io/my_first_simd_1_presentation</a></p>
+        <p><a
+            href="https://denisyaroshevskiy.github.io/my_first_simd_1_presentation/">
+            https://denisyaroshevskiy.github.io/my_first_simd_1_presentation</a>
+        </p>
       </section>
       <section>
         <h3>Dealing with code alignment</h3>
